@@ -1,0 +1,14 @@
+version: "3"
+services:
+  bootapp:
+    image: andver/bootapp:v6.0
+    ports:
+      - "8000:8080"
+    networks:
+      - new-network
+    volumes:
+      - data-volume:/opt/
+networks:
+  new-network:
+volumes:
+  data-volume:
