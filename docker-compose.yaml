@@ -1,7 +1,7 @@
 version: "3"
 services:
   bootapp:
-    image: andver/bootapp:v12.0
+    image: andver/bootapp:v13.0
     depends_on:
       - db
     ports:
