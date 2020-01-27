@@ -26,22 +26,22 @@ public class PersonController {
         personRepository.save(builder.setName("Sasha").setAge(40).build());
     }
 
-    @GetMapping(path = "/persons/")
+    @GetMapping(path = "/personsController/")
     public Iterable<Person> getAllPersons() {
         return personRepository.findAll();
     }
 
-    @GetMapping(path = "/persons/findByName/{name}")
+    @GetMapping(path = "/personsController/findByName/{name}")
     public Iterable<Person> findByName(@PathVariable String name) {
         return personRepository.findByName(name);
     }
 
-    @GetMapping(path = "/persons/findByNameContains/{name}")
+    @GetMapping(path = "/personsController/findByNameContains/{name}")
     public Iterable<Person> findByNameContains(@PathVariable String name) {
         return personRepository.findByNameContains(name);
     }
 
-    @PostMapping(path = "/persons/create/{name}/{age}")
+    @PostMapping(path = "/personsController/create/{name}/{age}")
     public Person createPerson(@PathVariable String name, @PathVariable Integer age) {
         PersonBuilder builder = new PersonBuilder();
         return personRepository.save(builder.setName(name).setAge(age).build());
