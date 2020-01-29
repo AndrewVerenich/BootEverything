@@ -2,9 +2,9 @@ package com.andver.firstApp.repository;
 
 import com.andver.firstApp.domain.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RestResource(path = "personsRestResource")
+@RepositoryRestResource(path = "personsRestResource")
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Iterable<Person> findByName(String name);
