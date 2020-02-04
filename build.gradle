@@ -1,12 +1,14 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id "org.liquibase.gradle" version "2.0.2"
 }
 
 group 'com.andver'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "org.liquibase.gradle"
 
 sourceCompatibility = 1.8
 
@@ -23,6 +25,24 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: springBootVersion
+    liquibaseRuntime group: 'org.liquibase', name: 'liquibase-core', version: liquibaseVersion
+    liquibaseRuntime group: 'org.liquibase', name: 'liquibase-groovy-dsl', version: '2.1.1'
+    liquibaseRuntime group: 'ch.qos.logback', name: 'logback-classic'
+    liquibaseRuntime group: 'mysql', name: 'mysql-connector-java'
     compile group: 'mysql', name: 'mysql-connector-java'
 
+}
+
+bootRun.dependsOn update
+
+liquibase {
+    activities {
+        main {
+            changeLogFile 'src/main/java/com/andver/firstApp/changelog/main-changelog.groovy'
+            url 'jdbc:mysql://localhost:3306/test_db'
+            username 'root'
+            password 'And+375298031012'
+        }
+    }
 }
