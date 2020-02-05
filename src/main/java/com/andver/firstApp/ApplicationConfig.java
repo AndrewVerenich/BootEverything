@@ -1,33 +1,46 @@
 package com.andver.firstApp;
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import com.andver.firstApp.tasks.MyTaskOne;
+import com.andver.firstApp.tasks.MyTaskTwo;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+@EnableBatchProcessing
 public class ApplicationConfig {
-//    @Bean
-//    public DataSource dataSource() {
-//
-//        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-//        return builder.setType(EmbeddedDatabaseType.HSQL).build();
-//    }
-//
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-//
-//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//        vendorAdapter.setGenerateDdl(true);
-//
-//        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-//        factory.setJpaVendorAdapter(vendorAdapter);
-//        factory.setPackagesToScan("com.acme.domain");
-//        factory.setDataSource(dataSource());
-//        return factory;
-//    }
-//
-//    @Bean
-//    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//
-//        JpaTransactionManager txManager = new JpaTransactionManager();
-//        txManager.setEntityManagerFactory(entityManagerFactory);
-//        return txManager;
-//    }
+
+    @Autowired
+    private JobBuilderFactory jobs;
+
+    @Autowired
+    private StepBuilderFactory steps;
+
+    @Bean
+    public Step stepOne() {
+        return steps.get("stepOne")
+                .tasklet(new MyTaskOne())
+                .build();
+    }
+
+    @Bean
+    public Step stepTwo() {
+        return steps.get("stepTwo")
+                .tasklet(new MyTaskTwo())
+                .build();
+    }
+
+    @Bean
+    public Job demoJob() {
+        return jobs.get("demoJob")
+                .start(stepOne())
+                .next(stepTwo())
+                .build();
+    }
+
 }
