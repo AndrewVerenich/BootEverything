@@ -9,11 +9,12 @@ import org.springframework.batch.repeat.RepeatStatus;
 
 public class MyTaskOne implements Tasklet {
 
-    Logger logger = LoggerFactory.getLogger(MyTaskOne.class);
+    private Logger logger = LoggerFactory.getLogger(MyTaskOne.class);
 
     @Override
-    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-        System.out.println("Execution MyTaskOne");
+    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
+        logger.info("---------------Execution MyTaskOne---------------");
+
         return RepeatStatus.FINISHED;
     }
 }
