@@ -1,9 +1,10 @@
 package com.andver.firstApp.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Person {
+public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

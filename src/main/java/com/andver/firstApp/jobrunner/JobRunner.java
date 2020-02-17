@@ -22,7 +22,7 @@ public class JobRunner {
         this.job = job;
     }
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "*/30 * * * * *")
     public void runJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
             JobRestartException, JobInstanceAlreadyCompleteException {
         JobExecution run = jobLauncher.run(job, new JobParameters());
