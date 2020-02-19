@@ -27,6 +27,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: springBootVersion
     liquibaseRuntime group: 'org.liquibase', name: 'liquibase-core', version: liquibaseVersion
     liquibaseRuntime group: 'org.liquibase', name: 'liquibase-groovy-dsl', version: '2.1.1'
     liquibaseRuntime group: 'ch.qos.logback', name: 'logback-classic'
