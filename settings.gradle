@@ -1,1 +1,3 @@
 rootProject.name = 'BootEverything'
+include 'bootExamples'
+
