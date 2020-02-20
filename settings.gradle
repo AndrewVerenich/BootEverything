@@ -1,3 +1,4 @@
 rootProject.name = 'BootEverything'
 include 'bootExamples'
+include 'cacheRedis'
 
