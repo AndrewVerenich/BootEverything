@@ -1,17 +1,19 @@
 package cache.domain;
 
-import org.springframework.data.redis.core.RedisHash;
+import javax.persistence.*;
+import java.io.Serializable;
 
-import javax.validation.constraints.Positive;
+@Entity
+public class Person implements Serializable {
 
-@RedisHash
-public class Person {
-
-    @Positive
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
     private Integer age;
 
     public Person(String name, Integer age) {
