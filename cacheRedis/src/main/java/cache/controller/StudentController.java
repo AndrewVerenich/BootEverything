@@ -1,31 +1,27 @@
 package cache.controller;
 
+import cache.domain.Student;
+import cache.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Profile("prod")
 @RestController
 public class StudentController {
 
-//    @Autowired
-//    private RedisTemplate<String, Object> redisTemplate;
-//
-//    private HashOperations hashOperations;
-//
-//    private static final String KEY = "Students";
-//
-//    @PostConstruct
-//    public void init() {
-//        hashOperations = redisTemplate.opsForHash();
-//    }
-//
-//
-//    @GetMapping("/createStudent/")
-//    public void createStudent() {
-//        Student student = new Student(1, "Siarhei", 55);
-//        hashOperations.put(KEY, student.getId(), student.toString());
-//    }
-//
-//    @GetMapping("/getStudent/")
-//    public String getStudent() {
-//        return (String) hashOperations.get(KEY, 1);
-//    }
+    @Autowired
+    StudentService studentService;
+
+    @GetMapping("/createStudent/")
+    public void createStudent() {
+        Student student = new Student("Siarhei", 55);
+        studentService.save(student);
+    }
+
+    @GetMapping("/getStudents/")
+    public Iterable<Student> getStudents() {
+        return studentService.getAllStudents();
+    }
 }

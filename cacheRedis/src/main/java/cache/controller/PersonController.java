@@ -4,10 +4,12 @@ import cache.domain.Person;
 import cache.domain.PersonBuilder;
 import cache.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+@Profile("local")
 @RestController
 public class PersonController {
 
